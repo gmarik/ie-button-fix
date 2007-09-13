@@ -1,0 +1,36 @@
+<html>
+  <title>Ie button element fix</title>
+
+  <!--[if IE]>
+  
+  <style type="text/css">
+    body {behavior: url("ie-button-fix.htc");}
+  </style>
+
+  <![endif]-->
+
+<body>
+  <h1>IE button element fix, sample</h1>
+  <strong>for IE browsers only, cuz w3c compliant ones don't need this!</strong>
+
+  <form method="get" action="#">
+    <fieldset>
+      <legend>
+        Rails REST actions
+      </legend>
+
+      <button type="submit" name="_method" value="insert">Create(INSERT)</button>
+      <button type="submit" name="_method" value="get">View(GET)</button>
+      <button type="submit" name="_method" value="put">Save(PUT)</button>
+      <button type="submit" name="_method" value="delete">Delete(DELETE)</button>
+    </fieldset>
+  </form>
+
+  <h4>FAQ</h4>
+
+  <h5>Author</h5>
+  <p class="vcard">
+    <span class="fn nickname">gmarik</span>
+  </p>
+</body>
+</html>

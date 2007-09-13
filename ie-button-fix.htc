@@ -1,0 +1,100 @@
+<attach event="ondocumentready" handler="fix_buttons" />
+<script>
+/**
+ *	ie-button-fix - v0.1.20070914
+ *	------------------------------------------------------------------------------------
+ *	(c) 2006	- Marian Hratson,
+ *      License  	- http://creativecommons.org/licenses/LGPL/2.1/
+ *
+ *	mailto: gmarik+nospam-ie-button-fix@gmail.com
+ *
+ *	Fixes MS Internet Explorer button element to behave according Web Standards
+ *
+ *	ie-button-fix is free software; you can redistribute it and/or
+ *	modify it under the terms of the GNU Lesser General Public
+ *	License as published by the Free Software Foundation; either
+ *	version 2.1 of the License, or (at your option) any later version.
+ *
+ *	ie-button-fix is distributed in the hope that it will be useful,
+ *	but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ *	Lesser General Public License for more details.
+ *
+ *	Credits and thanks to:
+ *	Peter Nederlof for Whatever:hover http://www.xs4all.nl/~peterned/
+ *
+ *	 Howto:
+ *	 Put this into yout html, like:
+
+ *  <!--[if IE]>
+ *    <style type="text/css">
+ *      body {behavior: url("ie-button-fix.htc");}
+ *    </style>
+ *	<![endif]-->
+
+
+ * TODO: 
+ * 0) more tests
+ * 1) restore buttons after submit or cancel
+ * 2) Treat all buttons without type attribute as submit ones(by W3C )
+
+ *
+ */
+
+var gmarik = {
+  js: {
+    ie: {
+      button: {
+        onclick : function(event) {
+          var btn = event.srcElement;
+
+          if (btn.form == null) {
+            return false;
+          }
+
+          var an_input_element = document.createElement("input");
+          an_input_element.type = "hidden";
+          an_input_element.name = btn.name;
+
+          if (btn.attributes["value"]) {
+            an_input_element.value = btn.attributes["value"].value;
+          }
+
+          // Create hidden field to be sent instead
+          btn.form.appendChild(an_input_element)
+
+          var buttons = btn.form.getElementsByTagName("button");
+          
+          for(var i = 0; i < buttons.length; i++) {
+            // Disable to avoid sending...            
+            buttons[i].disabled = 'disabled';
+          }
+				
+          btn.form.submit();
+        },
+
+        fix : function () {
+          var buttons = window.document.getElementsByTagName("button");
+
+          for(var i = 0; i < buttons.length; i++) {
+            var btn = buttons[i];
+
+            if (btn.type == 'submit' && btn.name != null) {
+              // TODO:
+              //if (btn.type == null) {
+              // btn['type'] = 'submit'
+              //} 
+        	
+              btn.attachEvent("onclick", gmarik.js.ie.button.onclick);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+function fix_buttons() {
+  gmarik.js.ie.button.fix();
+}
+</script>
