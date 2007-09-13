@@ -3,12 +3,15 @@
 /**
  *	ie-button-fix - v0.1.20070914
  *	------------------------------------------------------------------------------------
- *	(c) 2006	- Marian Hratson,
- *      License  	- http://creativecommons.org/licenses/LGPL/2.1/
+ *	(c) 2007	- Marian Hratson,
+ *  License  	- http://creativecommons.org/licenses/LGPL/2.1/
  *
  *	mailto: gmarik+nospam-ie-button-fix@gmail.com
  *
  *	Fixes MS Internet Explorer button element to behave according Web Standards
+ *  :
+ *  1) submit value of 'value' attribute instead .innerHTML value
+ *  2) submit only value of a pressed button
  *
  *	ie-button-fix is free software; you can redistribute it and/or
  *	modify it under the terms of the GNU Lesser General Public
