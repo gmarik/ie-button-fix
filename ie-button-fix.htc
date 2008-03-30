@@ -49,8 +49,13 @@ var gmarik = {
     ie: {
       button: {
         onclick : function(event) {
-          var btn = event.srcElement;
+          var btn = this;
 
+          if (false == btn.__onclick_orig_.call(btn)) {
+            return false;
+          }
+
+          // will not be submitted
           if (btn.form == null) {
             return false;
           }
@@ -87,8 +92,9 @@ var gmarik = {
               //if (btn.type == null) {
               // btn['type'] = 'submit'
               //} 
-        	
-              btn.attachEvent("onclick", gmarik.js.ie.button.onclick);
+
+              btn.__onclick_orig_ = btn.onclick
+              btn.onclick = gmarik.js.ie.button.onclick
             }
           }
         }
