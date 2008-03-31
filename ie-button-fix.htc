@@ -3,7 +3,7 @@
 /**
  *	ie-button-fix - v0.1.20070914
  *	------------------------------------------------------------------------------------
- *	(c) 2007	- Marian Hratson,
+ *	(c) 2007-2008	- Marian Hratson,
  *  License  	- http://creativecommons.org/licenses/LGPL/2.1/
  *
  *	mailto: gmarik+nospam-ie-button-fix@gmail.com
@@ -52,7 +52,7 @@ var gmarik = {
         onclick : function(event) {
           var btn = this;
 
-          if (false == btn.__onclick_orig_.call(btn)) {
+          if (btn['__onclick_orig_'] && false == btn.__onclick_orig_.call(btn)) {
             return false;
           }
 
@@ -94,7 +94,7 @@ var gmarik = {
               // btn['type'] = 'submit'
               //} 
 
-              btn.__onclick_orig_ = btn.onclick
+              btn['__onclick_orig_'] = btn.onclick
               btn.onclick = gmarik.js.ie.button.onclick
             }
           }
